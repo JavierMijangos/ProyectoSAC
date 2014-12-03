@@ -8,6 +8,7 @@ package vista;
 
 import controlador.ControladorFactory;
 import controlador.ControladorVistas;
+import modelo.Empleado;
 
 /**
  *
@@ -480,18 +481,17 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Apellido", "Nombre", "Tipo", "Salario", "Comision", "Teléfono", "Correo", "Edad", "Dirección"
+                "Apellido", "Nombre", "Tipo", "Salario", "Comision", "Teléfono", "Correo", "Edad", "Dirección", "ID"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTableEmpleados.setColumnSelectionAllowed(true);
         jScrollPane13.setViewportView(jTableEmpleados);
 
         jButtonNuevoEmpleado.setText("Nuevo");
@@ -502,6 +502,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         });
 
         jButtonModificarEmpleado.setText("Modificar");
+        jButtonModificarEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarEmpleadoActionPerformed(evt);
+            }
+        });
 
         jButtonEliinarEmpleado.setText("Eliminar");
         jButtonEliinarEmpleado.addActionListener(new java.awt.event.ActionListener() {
@@ -622,8 +627,25 @@ public class VistaPrincipal extends javax.swing.JFrame {
                         toString();
         controlador.obtenerControladorEmpleado().
                 obtenerEmpleados(tipoEmpleadosABuscar, jTableEmpleados);
+        
         jTableEmpleados.repaint();
     }//GEN-LAST:event_jButtonObtenerEmpleadosActionPerformed
+
+    private void jButtonModificarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarEmpleadoActionPerformed
+        Empleado empleado = new Empleado();
+        empleado.setApellido(jTableEmpleados.getValueAt(jTableEmpleados.getSelectedRow(), 0).toString());
+        empleado.setNombre(jTableEmpleados.getValueAt(jTableEmpleados.getSelectedRow(), 1).toString());
+        empleado.setTipo(jTableEmpleados.getValueAt(jTableEmpleados.getSelectedRow(), 2).toString());
+        empleado.setSalario((float) jTableEmpleados.getValueAt(jTableEmpleados.getSelectedRow(), 3));
+        empleado.setComision((float) jTableEmpleados.getValueAt(jTableEmpleados.getSelectedRow(), 4));
+        empleado.setTelefono(jTableEmpleados.getValueAt(jTableEmpleados.getSelectedRow(), 5).toString());
+        empleado.setEmail(jTableEmpleados.getValueAt(jTableEmpleados.getSelectedRow(), 6).toString());
+        empleado.setEdad((int) jTableEmpleados.getValueAt(jTableEmpleados.getSelectedRow(), 7));
+        empleado.setDireccion(jTableEmpleados.getValueAt(jTableEmpleados.getSelectedRow(), 8).toString());
+        empleado.setIdEmpleado((int) jTableEmpleados.getValueAt(jTableEmpleados.getSelectedRow(), 9));
+        
+        controlador.obtenerControladorVistas().mostrarFormularioModificarEmpleado(empleado);
+    }//GEN-LAST:event_jButtonModificarEmpleadoActionPerformed
 
     /**
      * @param args the command line arguments

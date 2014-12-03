@@ -10,6 +10,7 @@ import Vista.FormularioEmpleado;
 import Vista.VistaLogIn;
 import vista.VistaPrincipal;
 import javax.swing.JTabbedPane;
+import modelo.Empleado;
 
 /**
  *
@@ -74,6 +75,11 @@ public class ControladorVistas {
     
     public void mostrarFormularioEmpleado(){
         FormularioEmpleado formularioEmpleado = new FormularioEmpleado();
+        formularioEmpleado.setVisible(true);
+    }
+    
+    public void mostrarFormularioModificarEmpleado(Empleado empleado){
+        FormularioEmpleado formularioEmpleado = new FormularioEmpleado(empleado);
         formularioEmpleado.setVisible(true);
     }
 }

@@ -104,25 +104,11 @@ public class ControladorEmpleado {
     } 
     
     public void obtenerEmpleados(String tipoEmpleados, JTable tablaEmpleados){
-//        switch (tipoEmpleados){
-//            case "Todos" : 
-//                obtenerTodosLosEmpleados(tablaEmpleados);
-//                break;
-//            case "Vendedor" :
-//                break;
-//            case "Administrador" :
-//                break;
-//            case "Optometrista" :
-//                break;
-//            default:
-//                break;  
-//    }
         if (tipoEmpleados.matches("Todos")){
             obtenerTodosLosEmpleados(tablaEmpleados);
         }else{
             obtenerEmpleadosPorTipo(tipoEmpleados, tablaEmpleados);
-        }
-        
+        }        
     }
     
     ListaEmpleados listaEmpleados = new ListaEmpleados();
@@ -145,7 +131,7 @@ public class ControladorEmpleado {
     
     private void llenarTabla(ArrayList<Empleado> listaDeEmpleados, JTable tablaEmpleados){
         limpiarTabla(tablaEmpleados);
-        Object columnasDeDatos[] = new Object[9];
+        Object columnasDeDatos[] = new Object[10];
         DefaultTableModel modeloDeLaTabla = (DefaultTableModel) tablaEmpleados.getModel();
         for (Empleado empleados : listaDeEmpleados) {
             
@@ -158,6 +144,7 @@ public class ControladorEmpleado {
             columnasDeDatos[6] = empleados.getEmail();
             columnasDeDatos[7] = empleados.getEdad();
             columnasDeDatos[8] = empleados.getDireccion();
+            columnasDeDatos[9] = empleados.getIdEmpleado();
             //
             //agregamos los datos de cada columna en cada renglon:
             modeloDeLaTabla.addRow(columnasDeDatos);
