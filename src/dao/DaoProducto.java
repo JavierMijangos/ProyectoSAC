@@ -60,6 +60,9 @@ public class DaoProducto extends Dao{
             QUERY_OBTENER_PRODUCTOS_POR_TIPO_MARCA_Y_MODELO = "SELECT * FROM "
             + "productos WHERE tipo = ? AND marca= ? AND modelo = ?";
     
+    private ArrayList<Producto> listaProductos = null;
+    private ArrayList<String> listaString = null;
+    
     /**
      * Método para agregar un producto a la base de datos
      * @param producto El producto a guardar
@@ -113,14 +116,7 @@ public class DaoProducto extends Dao{
             listaDeResultados = query.getResultSet();
             
             if (listaDeResultados.next()) {
-                producto = new Producto();
-                producto.setIdProducto(listaDeResultados.getInt(1));
-                producto.setNombre(listaDeResultados.getString(2));
-                producto.setMarca(listaDeResultados.getString(3));
-                producto.setModelo(listaDeResultados.getString(4));
-                producto.setTipo(listaDeResultados.getString(5));
-                producto.setPrecio(listaDeResultados.getFloat(6));
-                producto.setCantidad(listaDeResultados.getInt(7));
+                producto = objetoConstruido(listaDeResultados);
             }
             else{
                 //Se considera el if, pero no es necesario
@@ -198,8 +194,8 @@ public class DaoProducto extends Dao{
             query = conexion.prepareStatement(QUERY_OBTENER_MARCAS);
             query.execute();
             listaDeResultados = query.getResultSet();
-            //TODO falta que regrese la lista
-            return null;        
+            
+            return arregloDeResultados(listaDeResultados);      
         } catch (SQLException ex) {
             Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -213,8 +209,8 @@ public class DaoProducto extends Dao{
             query.setString(1, tipo);
             query.execute();
             listaDeResultados = query.getResultSet();
-            //TODO falta que regrese la lista
-            return null;        
+            
+            return arregloDeResultados(listaDeResultados);        
         } catch (SQLException ex) {
             Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -228,8 +224,8 @@ public class DaoProducto extends Dao{
             query = conexion.prepareStatement(QUERY_OBTENER_MODELOS);
             query.execute();
             listaDeResultados = query.getResultSet();
-            //TODO falta que regrese la lista
-            return null;        
+            
+            return arregloDeResultados(listaDeResultados);        
         } catch (SQLException ex) {
             Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -243,8 +239,8 @@ public class DaoProducto extends Dao{
             query.setString(1, tipo);
             query.execute();
             listaDeResultados = query.getResultSet();
-            //TODO falta que regrese la lista
-            return null;        
+            
+            return arregloDeResultados(listaDeResultados);        
         } catch (SQLException ex) {
             Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -258,8 +254,8 @@ public class DaoProducto extends Dao{
             query.setString(1, marca);
             query.execute();
             listaDeResultados = query.getResultSet();
-            //TODO falta que regrese la lista
-            return null;        
+            
+            return arregloDeResultados(listaDeResultados);     
         } catch (SQLException ex) {
             Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -276,8 +272,8 @@ public class DaoProducto extends Dao{
             query.setString(2, marca);
             query.execute();
             listaDeResultados = query.getResultSet();
-            //TODO falta que regrese la lista
-            return null;        
+            
+            return arregloDeResultados(listaDeResultados);       
         } catch (SQLException ex) {
             Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -294,8 +290,8 @@ public class DaoProducto extends Dao{
             query = conexion.prepareStatement(QUERY_OBTENER_PRODUCTOS);
             query.execute();
             listaDeResultados = query.getResultSet();
-            //TODO falta que regrese la lista
-            return null;        
+            
+            return arregloDeDatos(listaDeResultados);        
         } catch (SQLException ex) {
             Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -309,8 +305,8 @@ public class DaoProducto extends Dao{
             query.setString(1, tipo);
             query.execute();
             listaDeResultados = query.getResultSet();
-            //TODO falta que regrese la lista
-            return null;        
+            
+            return arregloDeDatos(listaDeResultados);        
         } catch (SQLException ex) {
             Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -324,8 +320,8 @@ public class DaoProducto extends Dao{
             query.setString(1, marca);
             query.execute();
             listaDeResultados = query.getResultSet();
-            //TODO falta que regrese la lista
-            return null;        
+            
+            return arregloDeDatos(listaDeResultados);        
         } catch (SQLException ex) {
             Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -340,8 +336,8 @@ public class DaoProducto extends Dao{
             query.setString(2, marca);
             query.execute();
             listaDeResultados = query.getResultSet();
-            //TODO falta que regrese la lista
-            return null;        
+            
+            return arregloDeDatos(listaDeResultados);        
         } catch (SQLException ex) {
             Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -355,8 +351,8 @@ public class DaoProducto extends Dao{
             query.setString(1, modelo);
             query.execute();
             listaDeResultados = query.getResultSet();
-            //TODO falta que regrese la lista
-            return null;        
+            
+            return arregloDeDatos(listaDeResultados);       
         } catch (SQLException ex) {
             Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -372,8 +368,8 @@ public class DaoProducto extends Dao{
             query.setString(2, modelo);
             query.execute();
             listaDeResultados = query.getResultSet();
-            //TODO falta que regrese la lista
-            return null;        
+            
+            return arregloDeDatos(listaDeResultados);        
         } catch (SQLException ex) {
             Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -390,7 +386,7 @@ public class DaoProducto extends Dao{
             query.execute();
             listaDeResultados = query.getResultSet();
             //TODO falta que regrese la lista
-            return null;        
+            return arregloDeDatos(listaDeResultados);        
         } catch (SQLException ex) {
             Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -409,13 +405,54 @@ public class DaoProducto extends Dao{
             query.setString(3, modelo);
             query.execute();
             listaDeResultados = query.getResultSet();
-            //TODO falta que regrese la lista
-            return null;        
+            
+            return arregloDeDatos(listaDeResultados);        
         } catch (SQLException ex) {
             Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }      
+
+    private ArrayList<String> arregloDeResultados(ResultSet listaDeResultados) throws SQLException {
+        listaString = new ArrayList<>();
+        while(listaDeResultados.next()){
+            listaString.add(listaDeResultados.getString(1));
+        }
+        return listaString;
+    }
+    
+    private ArrayList<Producto> arregloDeDatos(ResultSet listaDeResultados) throws SQLException {
+        listaProductos = new ArrayList<>();
+        while(listaDeResultados.next()){
+            listaProductos.add(objetoConstruido(listaDeResultados));
+        }
+        return listaProductos;
+    }
+    
+    public static void main(String[] args) {
+        DaoProducto d = new DaoProducto();
+        ArrayList<String> prueba = new ArrayList<>();
+        prueba= d.obtenerRegistrosDeMarcas();
+        
+        for (String marca : prueba){
+            System.out.println(marca);
+        }
+    }
+
+    private Producto objetoConstruido(ResultSet listaDeResultados) throws SQLException {
+        Producto producto = new Producto();
+        
+        producto.setIdProducto(listaDeResultados.getInt(1));
+        producto.setNombre(listaDeResultados.getString(2));
+        producto.setMarca(listaDeResultados.getString(3));
+        producto.setModelo(listaDeResultados.getString(4));
+        producto.setTipo(listaDeResultados.getString(5));
+        producto.setPrecio(listaDeResultados.getFloat(6));
+        producto.setCantidad(listaDeResultados.getInt(7));
+        
+        return producto;
+        
+    }
         
 
     
