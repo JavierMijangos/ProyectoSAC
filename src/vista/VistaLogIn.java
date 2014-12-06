@@ -86,11 +86,13 @@ public class VistaLogIn extends javax.swing.JFrame {
 
     private void jButtonAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAceptarMouseClicked
        String clave = new String(jPasswordFieldContrasena.getPassword());
-       controlador.obtenerControladorAcceso().acceder(jTextFieldUsuario.
-               getText(), clave);      
-       this.dispose();
-       jTextFieldUsuario.setText("");
-       jPasswordFieldContrasena.setText("");
+       if(controlador.obtenerControladorAcceso().acceder(jTextFieldUsuario.
+               getText(), clave)){
+           controlador.obtenerControladorVistas().deshabilitarVista(this);
+       }else{
+            jTextFieldUsuario.setText("");
+            jPasswordFieldContrasena.setText("");
+       }         
     }//GEN-LAST:event_jButtonAceptarMouseClicked
 
     /**

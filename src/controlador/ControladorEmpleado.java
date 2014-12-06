@@ -115,7 +115,7 @@ public class ControladorEmpleado {
     //TODO Esto lo deben hacer Querys y no las listas.
     private void obtenerTodosLosEmpleados(JTable tablaEmpleados){
         ArrayList<Empleado> listaTodosEmpleados = listaEmpleados.listaEmpleados;
-        llenarTabla(listaTodosEmpleados, tablaEmpleados);
+        llenarTablaEmpleados(listaTodosEmpleados, tablaEmpleados);
     }
     
     private void obtenerEmpleadosPorTipo(String tipo, JTable tablaEmpleados){
@@ -126,10 +126,10 @@ public class ControladorEmpleado {
                 listaEspecificaEmpleados.add(listaTodosEmpleados.get(i));
             }
         }
-        llenarTabla(listaEspecificaEmpleados, tablaEmpleados);
+        llenarTablaEmpleados(listaEspecificaEmpleados, tablaEmpleados);
     }
     
-    private void llenarTabla(ArrayList<Empleado> listaDeEmpleados, JTable tablaEmpleados){
+    private void llenarTablaEmpleados(ArrayList<Empleado> listaDeEmpleados, JTable tablaEmpleados){
         limpiarTabla(tablaEmpleados);
         Object columnasDeDatos[] = new Object[10];
         DefaultTableModel modeloDeLaTabla = (DefaultTableModel) tablaEmpleados.getModel();
@@ -139,13 +139,14 @@ public class ControladorEmpleado {
             columnasDeDatos[1] = empleados.getNombre();
             columnasDeDatos[2] = empleados.getTipo();
             columnasDeDatos[3] = empleados.getSalario();
+            //TODO aquí es donde se debe de calcular la comisión de cada empleado
             columnasDeDatos[4] = empleados.getComision();
             columnasDeDatos[5] = empleados.getTelefono();
             columnasDeDatos[6] = empleados.getEmail();
             columnasDeDatos[7] = empleados.getEdad();
             columnasDeDatos[8] = empleados.getDireccion();
             columnasDeDatos[9] = empleados.getIdEmpleado();
-            //
+            
             //agregamos los datos de cada columna en cada renglon:
             modeloDeLaTabla.addRow(columnasDeDatos);
         }
@@ -158,5 +159,9 @@ public class ControladorEmpleado {
             modeloDeLaTabla.removeRow(0);
             i -= 1;
         }
+    }
+    
+    private float calcularComision(){
+        return 0;        
     }
 }

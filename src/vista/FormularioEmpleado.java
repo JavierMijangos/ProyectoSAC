@@ -6,7 +6,8 @@
 
 package Vista;
 
-import controlador.ControladorEmpleado;
+import controlador.ControladorFactory;
+import javax.swing.JTable;
 import modelo.Empleado;
 import modelo.Usuario;
 
@@ -21,12 +22,10 @@ public class FormularioEmpleado extends javax.swing.JFrame {
      */
     public FormularioEmpleado() {
         initComponents();
-        jButtonModificar.setVisible(false);
     }
     
-    public FormularioEmpleado(Empleado empleado) {
+    public FormularioEmpleado(Empleado empleado, String tipoEmpleado, JTable tablaEmpleados) {
         initComponents();
-        jButtonGuardar.setVisible(false);
         jTextFieldNombre.setText(empleado.getNombre());
         jTextFieldApellido.setText(empleado.getApellido());
         jComboBoxRol.setSelectedItem(empleado.getTipo());
@@ -36,6 +35,9 @@ public class FormularioEmpleado extends javax.swing.JFrame {
         jTextFieldSalario.setText(String.valueOf(empleado.getSalario()));
         jTextFieldTelefono.setText(empleado.getTelefono());
         this.empleado.setIdEmpleado(empleado.getIdEmpleado());
+        this.empleado.setComision(empleado.getComision());
+        this.tipoEmpleado = tipoEmpleado;
+        this.tablaEmpleados = tablaEmpleados;
     }
 
     /**
@@ -55,8 +57,8 @@ public class FormularioEmpleado extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        jLabelUsuario = new javax.swing.JLabel();
+        jLabelClave = new javax.swing.JLabel();
         jTextFieldNombre = new javax.swing.JTextField();
         jTextFieldApellido = new javax.swing.JTextField();
         jTextFieldUsuario = new javax.swing.JTextField();
@@ -70,7 +72,7 @@ public class FormularioEmpleado extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jButtonGuardar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
+        jLabelConfirmarClave = new javax.swing.JLabel();
         jPasswordFieldClave = new javax.swing.JPasswordField();
         jPasswordFieldConfirmarClave = new javax.swing.JPasswordField();
         jButtonModificar = new javax.swing.JButton();
@@ -93,9 +95,9 @@ public class FormularioEmpleado extends javax.swing.JFrame {
 
         jLabel8.setText("Salario");
 
-        jLabel10.setText("Usuario");
+        jLabelUsuario.setText("Usuario");
 
-        jLabel11.setText("Contraseña");
+        jLabelClave.setText("Contraseña");
 
         jTextFieldApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,8 +123,13 @@ public class FormularioEmpleado extends javax.swing.JFrame {
         });
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
-        jLabel9.setText("Confirmar contraseña");
+        jLabelConfirmarClave.setText("Confirmar contraseña");
 
         jButtonModificar.setText("Modificar");
         jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -158,7 +165,7 @@ public class FormularioEmpleado extends javax.swing.JFrame {
                                                     .addComponent(jLabel12)
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                     .addComponent(jTextFieldSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabelClave, javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jPasswordFieldClave, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGroup(layout.createSequentialGroup()
@@ -188,11 +195,11 @@ public class FormularioEmpleado extends javax.swing.JFrame {
                                             .addGap(0, 78, Short.MAX_VALUE)))
                                     .addComponent(jPasswordFieldConfirmarClave, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel9)
+                                        .addComponent(jLabelConfirmarClave)
                                         .addComponent(jLabel7)
                                         .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
+                                        .addComponent(jLabelUsuario)
                                         .addGap(73, 73, 73))
                                     .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(25, Short.MAX_VALUE))
@@ -237,17 +244,17 @@ public class FormularioEmpleado extends javax.swing.JFrame {
                             .addComponent(jTextFieldSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel10)
+                        .addComponent(jLabelUsuario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel9)
+                        .addComponent(jLabelConfirmarClave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPasswordFieldConfirmarClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel11)
+                        .addComponent(jLabelClave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPasswordFieldClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(26, 26, 26)
@@ -266,27 +273,24 @@ public class FormularioEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldApellidoActionPerformed
 
     private void jButtonGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonGuardarMouseClicked
-//        empleado.setNombre(jTextFieldNombre.getText());
-//        empleado.setApellido(jTextFieldApellido.getText());
-//        empleado.setTipo(jComboBoxRol.getSelectedItem().toString());
-//        empleado.setEdad(Integer.parseInt(jComboBoxEdad.getSelectedItem().
-//                toString()));
-//        empleado.setDireccion(jTextAreaDireccion.getText());
-//        empleado.setEmail(jTextFieldCorreo.getText());
-//        empleado.setTelefono(jTextFieldTelefono.getText());
-//        empleado.setSalario(Float.parseFloat(jTextFieldSalario.getText()));
-        
-        
         usuario.setClave(new String(jPasswordFieldClave.getPassword()));
         usuario.setNombreUsuario(jTextFieldUsuario.getText());
         
-        controlador.registrarEmpleado(empleadoConstruidoDelFormulrio(), usuario, 
+        controlador.obtenerControladorEmpleado().
+                registrarEmpleado(empleadoConstruidoDelFormulrio(), usuario, 
                 new String(jPasswordFieldConfirmarClave.getPassword()));
     }//GEN-LAST:event_jButtonGuardarMouseClicked
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
-        controlador.modificarEmpleado(empleadoConstruidoDelFormulrio());
+        controlador.obtenerControladorEmpleado().
+                modificarEmpleado(empleadoConstruidoDelFormulrio());
+        controlador.obtenerControladorEmpleado().obtenerEmpleados(tipoEmpleado, tablaEmpleados);
+        controlador.obtenerControladorVistas().deshabilitarVista(this);
     }//GEN-LAST:event_jButtonModificarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        controlador.obtenerControladorVistas().deshabilitarVista(this);
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private Empleado empleadoConstruidoDelFormulrio(){
         empleado.setNombre(jTextFieldNombre.getText());
@@ -339,16 +343,16 @@ public class FormularioEmpleado extends javax.swing.JFrame {
 
     private Usuario usuario = new Usuario();
     private Empleado empleado = new Empleado();
-    private ControladorEmpleado controlador = new ControladorEmpleado();
+    private String tipoEmpleado;
+    private JTable tablaEmpleados = new JTable();
+    private ControladorFactory controlador = new ControladorFactory();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
-    private javax.swing.JButton jButtonGuardar;
-    private javax.swing.JButton jButtonModificar;
+    public javax.swing.JButton jButtonGuardar;
+    public javax.swing.JButton jButtonModificar;
     private javax.swing.JComboBox jComboBoxEdad;
     private javax.swing.JComboBox jComboBoxRol;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -357,9 +361,11 @@ public class FormularioEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPasswordField jPasswordFieldClave;
-    private javax.swing.JPasswordField jPasswordFieldConfirmarClave;
+    public javax.swing.JLabel jLabelClave;
+    public javax.swing.JLabel jLabelConfirmarClave;
+    public javax.swing.JLabel jLabelUsuario;
+    public javax.swing.JPasswordField jPasswordFieldClave;
+    public javax.swing.JPasswordField jPasswordFieldConfirmarClave;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextAreaDireccion;
     private javax.swing.JTextField jTextFieldApellido;
@@ -367,6 +373,6 @@ public class FormularioEmpleado extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldSalario;
     private javax.swing.JTextField jTextFieldTelefono;
-    private javax.swing.JTextField jTextFieldUsuario;
+    public javax.swing.JTextField jTextFieldUsuario;
     // End of variables declaration//GEN-END:variables
 }

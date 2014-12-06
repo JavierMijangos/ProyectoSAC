@@ -8,6 +8,7 @@ package vista;
 
 import controlador.ControladorFactory;
 import controlador.ControladorVistas;
+import javax.swing.JOptionPane;
 import modelo.Empleado;
 
 /**
@@ -93,18 +94,31 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jTextAreaReporteMes = new javax.swing.JTextArea();
         jButtonGuardarReporteMes = new javax.swing.JButton();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jScrollPane11 = new javax.swing.JScrollPane();
-        jScrollPane12 = new javax.swing.JScrollPane();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jComboBoxTipoProducto = new javax.swing.JComboBox();
+        jLabel18 = new javax.swing.JLabel();
+        jComboBoxMarca = new javax.swing.JComboBox();
+        jLabel19 = new javax.swing.JLabel();
+        jComboBoxModelo = new javax.swing.JComboBox();
+        jButtonListarProductos = new javax.swing.JButton();
+        jButtonAgregarProducto = new javax.swing.JButton();
+        jButtonModificarProducto = new javax.swing.JButton();
+        jButtonEliminarProducto = new javax.swing.JButton();
+        jScrollPane14 = new javax.swing.JScrollPane();
+        jTableProductos = new javax.swing.JTable();
         jScrollPane10 = new javax.swing.JScrollPane();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane13 = new javax.swing.JScrollPane();
         jTableEmpleados = new javax.swing.JTable();
-        jButtonNuevoEmpleado = new javax.swing.JButton();
+        jButtonAgregarEmpleado = new javax.swing.JButton();
         jButtonModificarEmpleado = new javax.swing.JButton();
         jButtonEliinarEmpleado = new javax.swing.JButton();
-        jButtonObtenerEmpleados = new javax.swing.JButton();
+        jButtonListarEmpleados = new javax.swing.JButton();
         jComboBoxTipoEmpleado = new javax.swing.JComboBox();
         jLabel16 = new javax.swing.JLabel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jScrollPane12 = new javax.swing.JScrollPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemCerrarSesion = new javax.swing.JMenuItem();
@@ -472,9 +486,117 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jScrollPane7.setViewportView(jPanel4);
 
         jTabbedPanePestañas.addTab("Reporte de ventas del mes", jScrollPane7);
+
+        jLabel17.setText("Tipo de producto");
+
+        jComboBoxTipoProducto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Escoja un tipo", "Todos", "Lentes", "Micas", "Armazones", "Soluciones", "Contactos" }));
+        jComboBoxTipoProducto.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxTipoProductoItemStateChanged(evt);
+            }
+        });
+
+        jLabel18.setText("Marca");
+
+        jComboBoxMarca.setEnabled(false);
+        jComboBoxMarca.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxMarcaItemStateChanged(evt);
+            }
+        });
+
+        jLabel19.setText("Modelo");
+
+        jComboBoxModelo.setEnabled(false);
+
+        jButtonListarProductos.setText("Listar productos");
+        jButtonListarProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonListarProductosActionPerformed(evt);
+            }
+        });
+
+        jButtonAgregarProducto.setText("Agregar");
+
+        jButtonModificarProducto.setText("Modificar");
+
+        jButtonEliminarProducto.setText("Eliminar");
+
+        jTableProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Precio", "Cantidad", "Modelo", "Marca", "Tipo", "ID"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane14.setViewportView(jTableProductos);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel17)
+                            .addComponent(jComboBoxTipoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel18)
+                            .addComponent(jComboBoxMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel19)
+                            .addComponent(jComboBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButtonListarProductos)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jButtonAgregarProducto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonModificarProducto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonEliminarProducto))
+                    .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxTipoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonListarProductos)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAgregarProducto)
+                    .addComponent(jButtonModificarProducto)
+                    .addComponent(jButtonEliminarProducto))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(129, Short.MAX_VALUE))
+        );
+
+        jScrollPane9.setViewportView(jPanel6);
+
         jTabbedPanePestañas.addTab("Inventario", jScrollPane9);
-        jTabbedPanePestañas.addTab("Pacientes", jScrollPane11);
-        jTabbedPanePestañas.addTab("Historial", jScrollPane12);
 
         jTableEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -494,10 +616,15 @@ public class VistaPrincipal extends javax.swing.JFrame {
         });
         jScrollPane13.setViewportView(jTableEmpleados);
 
-        jButtonNuevoEmpleado.setText("Nuevo");
-        jButtonNuevoEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonAgregarEmpleado.setText("Agregar");
+        jButtonAgregarEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonNuevoEmpleadoMouseClicked(evt);
+                jButtonAgregarEmpleadoMouseClicked(evt);
+            }
+        });
+        jButtonAgregarEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgregarEmpleadoActionPerformed(evt);
             }
         });
 
@@ -515,10 +642,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButtonObtenerEmpleados.setText("Obtener Empleados");
-        jButtonObtenerEmpleados.addActionListener(new java.awt.event.ActionListener() {
+        jButtonListarEmpleados.setText("Listar Empleados");
+        jButtonListarEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonObtenerEmpleadosActionPerformed(evt);
+                jButtonListarEmpleadosActionPerformed(evt);
             }
         });
 
@@ -534,13 +661,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jButtonNuevoEmpleado)
+                        .addComponent(jButtonAgregarEmpleado)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonModificarEmpleado)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonEliinarEmpleado))
                     .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonObtenerEmpleados)
+                    .addComponent(jButtonListarEmpleados)
                     .addComponent(jComboBoxTipoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16))
                 .addContainerGap(91, Short.MAX_VALUE))
@@ -548,25 +675,27 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addContainerGap()
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBoxTipoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonObtenerEmpleados)
+                .addComponent(jButtonListarEmpleados)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonNuevoEmpleado)
+                    .addComponent(jButtonAgregarEmpleado)
                     .addComponent(jButtonModificarEmpleado)
                     .addComponent(jButtonEliinarEmpleado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
 
         jScrollPane10.setViewportView(jPanel5);
 
         jTabbedPanePestañas.addTab("Empleados", jScrollPane10);
+        jTabbedPanePestañas.addTab("Pacientes", jScrollPane11);
+        jTabbedPanePestañas.addTab("Historial", jScrollPane12);
 
         jMenu1.setText("Sesion");
 
@@ -610,28 +739,75 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonEliinarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliinarEmpleadoActionPerformed
-        // TODO add your handling code here:
+        int respuesta = JOptionPane.showConfirmDialog(null, "Estas seguro de" +
+                " querer eliminar este empleado?");
+        if(respuesta == JOptionPane.YES_OPTION){
+            controlador.obtenerControladorEmpleado().
+                    eliminarEmpleado(empleadoElegidoDeTabla().getIdEmpleado());
+            listarEmpleados();
+        }
     }//GEN-LAST:event_jButtonEliinarEmpleadoActionPerformed
 
-    private void jButtonNuevoEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonNuevoEmpleadoMouseClicked
-        controlador.obtenerControladorVistas().mostrarFormularioEmpleado();
-    }//GEN-LAST:event_jButtonNuevoEmpleadoMouseClicked
+    private void jButtonAgregarEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAgregarEmpleadoMouseClicked
+        
+    }//GEN-LAST:event_jButtonAgregarEmpleadoMouseClicked
 
     private void jMenuItemCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCerrarSesionActionPerformed
-        this.dispose();
+        controlador.obtenerControladorVistas().deshabilitarVista(this);
         controlador.obtenerControladorVistas().mostrarLogIn();
     }//GEN-LAST:event_jMenuItemCerrarSesionActionPerformed
 
-    private void jButtonObtenerEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonObtenerEmpleadosActionPerformed
-        String tipoEmpleadosABuscar = jComboBoxTipoEmpleado.getSelectedItem().
-                        toString();
-        controlador.obtenerControladorEmpleado().
-                obtenerEmpleados(tipoEmpleadosABuscar, jTableEmpleados);
-        
+    private void jButtonListarEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarEmpleadosActionPerformed
+        listarEmpleados(); 
         jTableEmpleados.repaint();
-    }//GEN-LAST:event_jButtonObtenerEmpleadosActionPerformed
+    }//GEN-LAST:event_jButtonListarEmpleadosActionPerformed
 
     private void jButtonModificarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarEmpleadoActionPerformed
+        controlador.obtenerControladorVistas().
+                mostrarFormularioModificarEmpleado(empleadoElegidoDeTabla(),
+                        tipoEmpleadosABuscar(), jTableEmpleados);
+    }//GEN-LAST:event_jButtonModificarEmpleadoActionPerformed
+
+    private void jButtonAgregarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarEmpleadoActionPerformed
+        controlador.obtenerControladorVistas().mostrarFormularioEmpleado();
+        listarEmpleados();
+    }//GEN-LAST:event_jButtonAgregarEmpleadoActionPerformed
+
+    private void jButtonListarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarProductosActionPerformed
+        System.out.println(jComboBoxMarca.getSelectedItem());
+    }//GEN-LAST:event_jButtonListarProductosActionPerformed
+
+    private void jComboBoxTipoProductoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTipoProductoItemStateChanged
+        String tipoProducto = jComboBoxTipoProducto.getSelectedItem().toString();
+        
+        if (tipoProducto.matches(jComboBoxTipoProducto.getItemAt(0).toString())){
+            JOptionPane.showMessageDialog(null, "Selecciones un tipo valido");
+        }else{
+            controlador.obtenerControladorInventario().
+                    obtenerMarcas(tipoProducto, jComboBoxMarca);
+        }
+        jComboBoxMarca.setEnabled(true);
+        jComboBoxModelo.setEnabled(false);
+    }//GEN-LAST:event_jComboBoxTipoProductoItemStateChanged
+
+    private void jComboBoxMarcaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxMarcaItemStateChanged
+        String marcaProducto = jComboBoxMarca.getSelectedItem().toString();
+        String tipoProducto = jComboBoxTipoProducto.getSelectedItem().toString();
+        
+        if (marcaProducto.matches(jComboBoxMarca.getItemAt(0).toString())){
+            JOptionPane.showMessageDialog(null, "Selecciones un tipo valido");
+        }else{
+            controlador.obtenerControladorInventario().
+                    obtenerModelos(marcaProducto, tipoProducto, jComboBoxModelo);
+        }
+        jComboBoxModelo.setEnabled(true);
+    }//GEN-LAST:event_jComboBoxMarcaItemStateChanged
+
+    private String tipoEmpleadosABuscar(){
+        return jComboBoxTipoEmpleado.getSelectedItem().toString();
+    }
+    
+    private Empleado empleadoElegidoDeTabla(){
         Empleado empleado = new Empleado();
         empleado.setApellido(jTableEmpleados.getValueAt(jTableEmpleados.getSelectedRow(), 0).toString());
         empleado.setNombre(jTableEmpleados.getValueAt(jTableEmpleados.getSelectedRow(), 1).toString());
@@ -644,9 +820,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
         empleado.setDireccion(jTableEmpleados.getValueAt(jTableEmpleados.getSelectedRow(), 8).toString());
         empleado.setIdEmpleado((int) jTableEmpleados.getValueAt(jTableEmpleados.getSelectedRow(), 9));
         
-        controlador.obtenerControladorVistas().mostrarFormularioModificarEmpleado(empleado);
-    }//GEN-LAST:event_jButtonModificarEmpleadoActionPerformed
-
+        return empleado;
+    }
+    
+    private void listarEmpleados(){
+        controlador.obtenerControladorEmpleado().
+                obtenerEmpleados(tipoEmpleadosABuscar(), jTableEmpleados);
+    }
     /**
      * @param args the command line arguments
      */
@@ -687,21 +867,25 @@ public class VistaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonAgregarEmpleado;
+    private javax.swing.JButton jButtonAgregarProducto;
     private javax.swing.JButton jButtonArmazon;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonContactos;
     private javax.swing.JButton jButtonEliinarEmpleado;
     private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonEliminarProducto;
     private javax.swing.JButton jButtonExamen;
     private javax.swing.JButton jButtonGenerarReporteDia;
     private javax.swing.JButton jButtonGenerarReporteMes;
     private javax.swing.JButton jButtonGuardarReporteDia;
     private javax.swing.JButton jButtonGuardarReporteMes;
     private javax.swing.JButton jButtonLentes;
+    private javax.swing.JButton jButtonListarEmpleados;
+    private javax.swing.JButton jButtonListarProductos;
     private javax.swing.JButton jButtonMicas;
     private javax.swing.JButton jButtonModificarEmpleado;
-    private javax.swing.JButton jButtonNuevoEmpleado;
-    private javax.swing.JButton jButtonObtenerEmpleados;
+    private javax.swing.JButton jButtonModificarProducto;
     private javax.swing.JButton jButtonRegistrarVenta;
     private javax.swing.JButton jButtonSoluciones;
     private javax.swing.JComboBox jComboBoxAno;
@@ -711,10 +895,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBoxDia;
     private javax.swing.JComboBox jComboBoxDiaReporteDia;
     private javax.swing.JComboBox jComboBoxDiaReporteMes;
+    private javax.swing.JComboBox jComboBoxMarca;
     private javax.swing.JComboBox jComboBoxMes;
     private javax.swing.JComboBox jComboBoxMesReporteDia;
     private javax.swing.JComboBox jComboBoxMesReporteMes;
+    private javax.swing.JComboBox jComboBoxModelo;
     private javax.swing.JComboBox jComboBoxTipoEmpleado;
+    private javax.swing.JComboBox jComboBoxTipoProducto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -723,6 +910,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -743,6 +933,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JRadioButton jRadioButtonAbonos;
     private javax.swing.JRadioButton jRadioButtonContado;
     private javax.swing.JScrollPane jScrollPane1;
@@ -750,6 +941,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
+    private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -760,6 +952,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane9;
     public javax.swing.JTabbedPane jTabbedPanePestañas;
     private javax.swing.JTable jTableEmpleados;
+    private javax.swing.JTable jTableProductos;
     private javax.swing.JTextArea jTextAreaReporteDia;
     private javax.swing.JTextArea jTextAreaReporteMes;
     // End of variables declaration//GEN-END:variables

@@ -10,6 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -27,6 +30,35 @@ public class DaoProducto extends Dao{
             "cantidad = ? WHERE idProducto = ?";
     private static final String QUERY_ELIMINAR = "DELETE FROM Productos " +
             "WHERE idProducto = ?";
+    private static final String QUERY_OBTENER_MARCAS = "SELECT DISTINCT marca "
+            + "FROM productos";
+    private static final String QUERY_OBTENER_MARCAS_POR_TIPO = "SELECT "
+            + "DISTINCT marca FROM productos WHERE tipo = ?";
+    private static final String QUERY_OBTENER_MODELOS = "SELECT DISTINCT modelo"
+            + " FROM productos";
+    private static final String QUERY_OBTENER_MODELOS_POR_TIPO = "SELECT "
+            + "DISTINCT modelo FROM productos WHERE tipo = ?";
+    private static final String QUERY_OBTENER_MODELOS_POR_MARCA = "SELECT"
+            + " DISTINCT modelo FROM productos WHERE marca = ?";
+    private static final String QUERY_OBTENER_MODELOS_POR_TIPO_Y_MARCA =
+            "SELECT DISTINCT modelo FROM productos WHERE tipo = ? AND marca = ?";
+    private static final String QUERY_OBTENER_PRODUCTOS = "SELECT * FROM "
+            + "productos";
+    private static final String QUERY_OBTENER_PRODUCTOS_POR_TIPO = "SELECT *"
+            + " FROM productos WHERE tipo = ?";
+    private static final String QUERY_OBTENER_PRODUCTOS_POR_MARCA = "SELECT *"
+            + " FROM productos WHERE marca = ?";
+    private static final String QUERY_OBTENER_PRODUCTOS_POR_TIPO_Y_MARCA = 
+            "SELECT * FROM productos WHERE tipo = ? AND marca = ?";
+    private static final String QUERY_OBTENER_PRODUCTOS_POR_MODELO = "SELECT *"
+            + " FROM productos WHERE modelo = ?";
+    private static final String QUERY_OBTENER_PRODUCTOS_POR_TIPO_Y_MODELO = 
+            "SELECT * FROM productos WHERE tipo= ? AND modelo = ?";
+    private static final String QUERY_OBTENER_PRODUCTOS_POR_MARCA_Y_MODELO = 
+            "SELECT * FROM productos WHERE marca= ? AND modelo = ?";
+    private static final String 
+            QUERY_OBTENER_PRODUCTOS_POR_TIPO_MARCA_Y_MODELO = "SELECT * FROM "
+            + "productos WHERE tipo = ? AND marca= ? AND modelo = ?";
     
     /**
      * Método para agregar un producto a la base de datos
@@ -159,6 +191,232 @@ public class DaoProducto extends Dao{
         
         return false;
     }
+    
+    public ArrayList<String> obtenerRegistrosDeMarcas(){
+        try {
+            conexion = DaoFactory.crearConexion();
+            query = conexion.prepareStatement(QUERY_OBTENER_MARCAS);
+            query.execute();
+            listaDeResultados = query.getResultSet();
+            //TODO falta que regrese la lista
+            return null;        
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public ArrayList<String> obtenerRegistrosDeMarcasPorTipo(String tipo){
+        try {
+            conexion = DaoFactory.crearConexion();
+            query = conexion.prepareStatement(QUERY_OBTENER_MARCAS_POR_TIPO);
+            query.setString(1, tipo);
+            query.execute();
+            listaDeResultados = query.getResultSet();
+            //TODO falta que regrese la lista
+            return null;        
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    
+    public ArrayList<String> obtenerRegistrosDeModelos(){
+        try {
+            conexion = DaoFactory.crearConexion();
+            query = conexion.prepareStatement(QUERY_OBTENER_MODELOS);
+            query.execute();
+            listaDeResultados = query.getResultSet();
+            //TODO falta que regrese la lista
+            return null;        
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public ArrayList<String> obtenerRegistrosDeModelosPorTipo(String tipo){
+        try {
+            conexion = DaoFactory.crearConexion();
+            query = conexion.prepareStatement(QUERY_OBTENER_MODELOS_POR_TIPO);
+            query.setString(1, tipo);
+            query.execute();
+            listaDeResultados = query.getResultSet();
+            //TODO falta que regrese la lista
+            return null;        
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public ArrayList<String> obtenerRegistrosDeModelosPorMarca(String marca){
+        try {
+            conexion = DaoFactory.crearConexion();
+            query = conexion.prepareStatement(QUERY_OBTENER_MODELOS_POR_MARCA);
+            query.setString(1, marca);
+            query.execute();
+            listaDeResultados = query.getResultSet();
+            //TODO falta que regrese la lista
+            return null;        
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public ArrayList<String> obtenerRegistrosDeModelosPorTipoYMarca(String tipo,
+            String marca){
+        try {
+            conexion = DaoFactory.crearConexion();
+            query = conexion
+                    .prepareStatement(QUERY_OBTENER_MODELOS_POR_TIPO_Y_MARCA);
+            query.setString(1, tipo);
+            query.setString(2, marca);
+            query.execute();
+            listaDeResultados = query.getResultSet();
+            //TODO falta que regrese la lista
+            return null;        
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    /**
+     *
+     * @return
+     */
+    public ArrayList<Producto> obtenerRegistrosDeProductos(){
+        try {
+            conexion = DaoFactory.crearConexion();
+            query = conexion.prepareStatement(QUERY_OBTENER_PRODUCTOS);
+            query.execute();
+            listaDeResultados = query.getResultSet();
+            //TODO falta que regrese la lista
+            return null;        
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public ArrayList<Producto> obtenerRegistrosDeProductosPorTipo(String tipo){
+        try {
+            conexion = DaoFactory.crearConexion();
+            query = conexion.prepareStatement(QUERY_OBTENER_PRODUCTOS_POR_TIPO);
+            query.setString(1, tipo);
+            query.execute();
+            listaDeResultados = query.getResultSet();
+            //TODO falta que regrese la lista
+            return null;        
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public ArrayList<Producto> obtenerRegistrosDeProductosPorMarca(String marca){
+        try {
+            conexion = DaoFactory.crearConexion();
+            query = conexion.prepareStatement(QUERY_OBTENER_PRODUCTOS_POR_MARCA);
+            query.setString(1, marca);
+            query.execute();
+            listaDeResultados = query.getResultSet();
+            //TODO falta que regrese la lista
+            return null;        
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public ArrayList<Producto> obtenerRegistrosDeProductosPorTipoYMarca(String tipo, String marca){
+        try {
+            conexion = DaoFactory.crearConexion();
+            query = conexion.prepareStatement(QUERY_OBTENER_PRODUCTOS_POR_TIPO_Y_MARCA);
+            query.setString(1, tipo);
+            query.setString(2, marca);
+            query.execute();
+            listaDeResultados = query.getResultSet();
+            //TODO falta que regrese la lista
+            return null;        
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public ArrayList<Producto> obtenerRegistrosDeProductosPorModelo(String modelo){
+        try {
+            conexion = DaoFactory.crearConexion();
+            query = conexion.prepareStatement(QUERY_OBTENER_PRODUCTOS_POR_MODELO);
+            query.setString(1, modelo);
+            query.execute();
+            listaDeResultados = query.getResultSet();
+            //TODO falta que regrese la lista
+            return null;        
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public ArrayList<Producto> obtenerRegistrosDeProductosPorTipoYModelo
+        (String tipo, String modelo){
+        try {
+            conexion = DaoFactory.crearConexion();
+            query = conexion.prepareStatement(QUERY_OBTENER_PRODUCTOS_POR_TIPO_Y_MODELO);
+            query.setString(1, tipo);
+            query.setString(2, modelo);
+            query.execute();
+            listaDeResultados = query.getResultSet();
+            //TODO falta que regrese la lista
+            return null;        
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+        
+    public ArrayList<Producto> obtenerRegistrosDeProductosPorMarcaYModelo
+        (String marca, String modelo){
+        try {
+            conexion = DaoFactory.crearConexion();
+            query = conexion.prepareStatement(QUERY_OBTENER_PRODUCTOS_POR_MARCA_Y_MODELO);
+            query.setString(1, marca);
+            query.setString(2, modelo);
+            query.execute();
+            listaDeResultados = query.getResultSet();
+            //TODO falta que regrese la lista
+            return null;        
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    } 
+     
+    public ArrayList<Producto> obtenerRegistrosDeProductosPorTipoMarcaYModelo
+        (String tipo, String marca, String modelo){
+        try {
+            conexion = DaoFactory.crearConexion();
+            query = conexion.
+                    prepareStatement
+                    (QUERY_OBTENER_PRODUCTOS_POR_TIPO_MARCA_Y_MODELO);
+            query.setString(1, tipo);
+            query.setString(2, marca);
+            query.setString(3, modelo);
+            query.execute();
+            listaDeResultados = query.getResultSet();
+            //TODO falta que regrese la lista
+            return null;        
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }      
+        
 
     
 }

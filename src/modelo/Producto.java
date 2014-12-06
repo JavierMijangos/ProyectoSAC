@@ -23,6 +23,19 @@ public class Producto {
     public Producto() {
     }
 
+    public Producto(int idProducto, String tipo, String nombre, String modelo, String marca, float precio, int cantidad, boolean existencia) {
+        this.idProducto = idProducto;
+        this.tipo = tipo;
+        this.nombre = nombre;
+        this.modelo = modelo;
+        this.marca = marca;
+        this.precio = precio;
+        this.cantidad = cantidad;
+        this.existencia = existencia;
+    }
+    
+    
+
     /**
      * @return the tipo
      */

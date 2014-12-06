@@ -25,13 +25,15 @@ public class ControladorAcceso {
     public ControladorAcceso() {
     }
     
-     public void acceder (String campoUsuario, String campoClave){  
+     public boolean acceder (String campoUsuario, String campoClave){  
         setUsuarioAValidar(campoUsuario, campoClave);
         
         if (usuarioValido()){
             generarVista();
+            return true;
         }else{
             mostrarMensajeDeError();
+            return false;
         }        
     }
         

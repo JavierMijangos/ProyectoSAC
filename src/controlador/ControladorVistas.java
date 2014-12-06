@@ -8,8 +8,10 @@ package controlador;
 
 import Vista.FormularioEmpleado;
 import Vista.VistaLogIn;
+import javax.swing.JFrame;
 import vista.VistaPrincipal;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import modelo.Empleado;
 
 /**
@@ -75,11 +77,23 @@ public class ControladorVistas {
     
     public void mostrarFormularioEmpleado(){
         FormularioEmpleado formularioEmpleado = new FormularioEmpleado();
+        formularioEmpleado.jButtonModificar.setVisible(false);
         formularioEmpleado.setVisible(true);
     }
     
-    public void mostrarFormularioModificarEmpleado(Empleado empleado){
-        FormularioEmpleado formularioEmpleado = new FormularioEmpleado(empleado);
+    public void mostrarFormularioModificarEmpleado(Empleado empleado, String tipoEmpleado, JTable tablaEmpleados){
+        FormularioEmpleado formularioEmpleado = new FormularioEmpleado(empleado, tipoEmpleado, tablaEmpleados);
+        formularioEmpleado.jButtonGuardar.setVisible(false);
+        formularioEmpleado.jLabelClave.setVisible(false);
+        formularioEmpleado.jLabelConfirmarClave.setVisible(false);
+        formularioEmpleado.jLabelUsuario.setVisible(false);
+        formularioEmpleado.jPasswordFieldClave.setVisible(false);
+        formularioEmpleado.jPasswordFieldConfirmarClave.setVisible(false);
+        formularioEmpleado.jTextFieldUsuario.setVisible(false);
         formularioEmpleado.setVisible(true);
+    }
+
+    public void deshabilitarVista(JFrame vista) {
+        vista.dispose();
     }
 }
